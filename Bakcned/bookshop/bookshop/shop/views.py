@@ -4,6 +4,8 @@ import json
 from . import service
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from .service import add_book
+from .utils.decorators import jwt_required
 
 @csrf_exempt
 def home(request):
@@ -38,17 +40,16 @@ def signup(request):
 
 
 @csrf_exempt
+@jwt_required
 def add_book(request):
-    # if not jwt_auth(request):
-    #     return HttpResponse("UnAuthorized!", status=401)
     if request.method == "POST":
         data = json.loads(request.body)
-        response = service.add_book(data.get("name"), data.get("author"), data.get("price"), data.get("description"), data.get("genre"))
+        response = add_book(data.get("name"), data.get("author"), data.get("price"), data.get("description"), data.get("genre"))
         if response is None:
             return HttpResponse("Unable to add new book. Check your inputs", status=400)
         if response == "Bookname exists":
             return HttpResponse("Bookname exists", status=400)
-        return HttpResponse(json.dumps({"message": "Book added successfully!", "book_id": response.bookid}), status = 200)
+        return HttpResponse(json.dumps({"message": "Book added successfully!", "book_id": response.bookid}), status=200)
 
     return HttpResponse("Method not allowed", status=405)
 
