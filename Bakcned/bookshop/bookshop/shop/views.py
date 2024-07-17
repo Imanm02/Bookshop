@@ -4,8 +4,9 @@ import json
 from . import service
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .service import add_book
+from .models import User, Book, Review  # Ensure User and Book are imported here
 from .utils.decorators import jwt_required
+import jwt
 
 @csrf_exempt
 def home(request):
