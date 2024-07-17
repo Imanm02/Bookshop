@@ -1,17 +1,23 @@
+from functools import wraps
+from django.http import JsonResponse
 import jwt
-from django.http import HttpResponse
 
 def jwt_required(f):
-    def wrap(request, *args, **kwargs):
+    @wraps(f)
+    def decorated_function(request, *args, **kwargs):
         token = request.headers.get('Authorization')
-        if not token:
-            return HttpResponse('Unauthorized', status=401)
+        if token is None:
+            return JsonResponse({'message': 'Authorization token is missing'}, status=401)
+
         try:
-            jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
+            # Assuming 'secret' is your secret key; replace it with your actual key
+            # Also, specify the algorithm you used to encode the token
+            payload = jwt.decode(token, 'your_secret_key', algorithms=['HS256'])
+            request.user_id = payload['user_id']  # Example payload user identification
         except jwt.ExpiredSignatureError:
-            return HttpResponse('Token expired', status=401)
+            return JsonResponse({'message': 'Token has expired'}, status=401)
         except jwt.InvalidTokenError:
-            return HttpResponse('Invalid token', status=401)
+            return JsonResponse({'message': 'Invalid token'}, status=401)
 
         return f(request, *args, **kwargs)
-    return wrap
+    return decorated_function
