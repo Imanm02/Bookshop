@@ -4,6 +4,16 @@ The Online Bookstore project is a web application developed as part of the pract
 
 The project consists of two main components: a front-end web application for user interaction and a back-end API that handles order processing and other business logic.
 
+## Project Components
+
+- **Frontend**: A React-based web application that provides a dynamic and interactive user experience.
+- **Backend**: A Django-based API that manages business logic, including user authentication, order processing, and data persistence.
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Node.js and npm
+
 ## Getting Started
 
 Follow these steps to set up and run the project locally:
@@ -43,15 +53,16 @@ Follow these steps to set up and run the project locally:
 
 ## Features
 
-- Browse books by category.
-- View book details (title, author, description, price).
-- Add books to the cart.
-- Place orders
+- Book Browsing: Explore books sorted by various categories.
+- Detailed Book Views: Access detailed information about each book including the title, author, description, and pricing.
+- Shopping Cart: Add books to a personal shopping cart.
+- Order Processing: Complete purchases with an integrated order processing system.
 
 ## Technologies Used
 
 - Django (Python web framework)
-- React
+- React, Redux for state management
+- SQLite (Development), PostgreSQL (Production recommended)
 
 ## Maintainers
 
