@@ -11,6 +11,29 @@ from .utils.decorators import jwt_required
 def home(request):
     return HttpResponse("Hello, Django!")
 
+@csrf_exempt
+@jwt_required
+def get_user_profile(request, user_id):
+    if request.method == "GET":
+        user = User.objects.filter(userid=user_id).first()
+        if user:
+            user_data = {"username": user.username, "phone": user.phone}
+            return HttpResponse(json.dumps(user_data), content_type="application/json", status=200)
+        else:
+            return HttpResponse("User not found", status=404)
+
+@csrf_exempt
+@jwt_required
+def update_user_profile(request, user_id):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        user = User.objects.filter(userid=user_id).first()
+        if user:
+            user.phone = data.get('phone', user.phone)
+            user.save()
+            return HttpResponse(json.dumps({"message": "Profile updated successfully"}), status=200)
+        else:
+            return HttpResponse("User not found", status=404)
 
 @csrf_exempt
 def signin(request):
