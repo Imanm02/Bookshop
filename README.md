@@ -1,6 +1,7 @@
 # Online Bookstore Project
 
 The Online Bookstore project is a web application developed as part of the practical project for the System Analysis and Design course. It allows users to browse and purchase books online.
+
 The project consists of two main components: a front-end web application for user interaction and a back-end API that handles order processing and other business logic.
 
 ## Getting Started
@@ -51,3 +52,11 @@ Follow these steps to set up and run the project locally:
 
 - Django (Python web framework)
 - React
+
+## Maintainers
+
+- [Iman Mohammadi](https://github.com/Imanm02)
+- [Negar Babashah](https://github.com/Negarbsh)
+- [Armin Saghafian](https://github.com/ArminS03)
+- [Mahdi Saber](https://github.com/elshan22)
+- [Amirreza Aranpour](https://github.com/AmirrezaAranpour)
