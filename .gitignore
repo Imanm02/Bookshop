@@ -1,3 +1,48 @@
-.idea
-Bakcned/.idea
-Bakcned/.venv
+# IDE and editor folders
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Python specific
+Bakcned/__pycache__/
+Bakcned/*.py[cod]
+Bakcned/*$py.class
+Bakcned/.venv/
+*.sqlite3
+
+# Django specific
+Bakcned/db.sqlite3
+Bakcned/*/__pycache__/
+Bakcned/*/migrations/__pycache__/
+*.pyc
+
+# Node specific
+Frontend/node_modules/
+Frontend/package-lock.json
+npm-debug.log
+yarn-error.log
+
+# Build outputs
+Frontend/build/
+Frontend/.next/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Operating System specific
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+*.csv
+
+# Others
+*.tmp
+*.temp
+*.swp
+*.swo
