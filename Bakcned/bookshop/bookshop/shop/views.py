@@ -13,6 +13,24 @@ def home(request):
 
 @csrf_exempt
 @jwt_required
+def add_review(request, book_id):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        user_id = request.user_id  # Assuming you decode and attach user_id from JWT in your jwt_required decorator
+        book = Book.objects.filter(bookid=book_id).first()
+        if book:
+            Review.objects.create(
+                user_id=user_id,
+                book_id=book_id,
+                rating=data['rating'],
+                comment=data['comment']
+            )
+            return HttpResponse(json.dumps({"message": "Review added successfully"}), status=200)
+        else:
+            return HttpResponse("Book not found", status=404)
+
+@csrf_exempt
+@jwt_required
 def get_user_profile(request, user_id):
     if request.method == "GET":
         user = User.objects.filter(userid=user_id).first()
